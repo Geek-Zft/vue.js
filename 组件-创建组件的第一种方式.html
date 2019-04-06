@@ -12,7 +12,7 @@
 <body>
     <div id="app">
         <!-- 如果要使用组件，直接以HTML形式引入页面 -->
-        <!-- 注意，注册时可以驼峰，但是使用时转为 -  -->
+        <!-- 注意，注册时可以驼峰，但是使用时转为 - 如果使用驼峰，没这种问题 -->
         <!-- <myCom1></myCom1> -->
         <my-com1></my-com1>
     </div>
@@ -26,6 +26,11 @@
 
         //1.2 使用Vue.component('组件名称'，创建出来的组件模板对象)
         Vue.component('myCom1',com1)
+
+        // 简写
+        // Vue.component('myCom1',Vue.extend({
+        //     template: '<h3>this is h3 Vue.extend 创建的</h3>'
+        // }))
 
         var vm = new Vue({
             el: '#app',
