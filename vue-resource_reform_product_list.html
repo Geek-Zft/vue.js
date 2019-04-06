@@ -58,6 +58,8 @@
 
 		// vue-resource global config root url
 		Vue.http.options.root = 'http://kerys.pythonanywhere.com/';
+		//全局启用enulateJSON选项
+		Vue.http.options.emulateJSON = true;
 
 
 		new Vue({
@@ -73,7 +75,9 @@
 					//second param: 要提交的数据，要以对象形式提交，{name:this.name}
 					//third param: 配置对象，要以那种表单数据类型提交，{emulateJSON:true},以普通表单格式，将数据提交给服务器application/x-www-form-urlencoded
 					//note that 想要根路径配置生效，必须是相对路径，不能加/
-					this.$http.post('api/addprod/',{'name': this.name}, {emulateJSON: true}).then(result=>{
+					//配置全局emulateJSON后，则不需要在此声明emulateJSON配置
+					// this.$http.post('api/addprod/',{'name': this.name}, {emulateJSON: true}).then(result=>{
+					this.$http.post('api/addprod/',{'name': this.name}).then(result=>{
 						var data = result.body
 						console.log(data)
 						// if(data.status == 'success') {
