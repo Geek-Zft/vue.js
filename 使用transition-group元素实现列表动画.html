@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>列表动画</title>
+    <script src="lib/vue.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+
+        li {
+            border: 1px dashed #999;
+            margin: 5px;
+            line-height: 35px;
+            padding-left: 5px;
+            font-size: 15px;
+            width: 100%;
+        }
+        li:hover {
+            background-color: hotpink;
+            transition: all 0.6s ease;
+        }
+
+
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+            transform: translateY(80px);
+        }
+
+        .v-enter-active,
+        .v-leave-active {
+            transition: all 0.8s ease;
+        }
+
+        /* v-move  v-leave-active 配合使用实现，删除时，渐渐漂上来的效果  */
+        .v-move {
+            transition: all 0.4s ease;
+        }
+
+        .v-leave-active {
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+        
+        <div class="panel panel-primary">
+              <div class="panel-heading">
+                    <h3 class="panel-title">添加</h3>
+              </div>
+              <div class="panel-body form-inline">
+                    <label>
+                        Id:
+                        <input type="text" class="form-control" v-model="id">
+                    </label> 
+                    <label>
+                        name:
+                        <input type="text" class="form-control" v-model="name">
+                    </label>
+                    <input type="button" value="add" @click="add" class="btn btn-primary">                     
+              </div>
+        </div>
+        <!-- <ul> -->
+            <!-- 通过v-for渲染出来的，用transition-group -->
+            <!-- appear实现页面入场时候的效果 -->
+            <!-- tag属性指定，transition-group渲染为什么元素 如果不指定，默认span -->
+            <transition-group appear tag="ul">
+                    <li v-for="(item,i) in list" :key="item.id" @click="del(i)">
+                            {{item.id}} ---- {{item.name}}
+                    </li>
+            </transition-group>
+        <!-- </ul> -->
+        
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                id: '',
+                name: '',
+                list: [
+                    {id: 1, name: 'geek'},
+                    {id: 2, name: 'zft'},
+                    {id: 3, name: 'lalal'}
+                ]
+            },
+            methods: {
+                add() {
+                    this.list.push({id: this.id, name: this.name})
+                    this.id = this.name = ''
+                },
+                del(i) {
+                    this.list.splice(i,1)
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
