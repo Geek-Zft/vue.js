@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<script src="lib/vue.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+		<div id="app">
+			<input type="button" value="modify" @click="msg='no'">
+			<h3 id="h3">{{msg}}</h3>
+		</div>
+	</body>
+	<script>
+		new Vue({
+			el: "#app",
+			data: {
+				msg: 'ok'
+			},
+			methods: {
+				show() {
+					console.log('show.....')
+				}
+			},
+			beforeCreate() {
+				//我们遇到的第一个盛情周期函数,表示实例被完全创建出来前会执行它
+// 				console.log(this.msg)
+// 				this.show()
+				// data和methods中的数据还没被初始化
+			},
+			created() { 
+				//第二个声明周期函数
+				//console.log(this.msg)
+				//this.show() //被初始化好了, 
+			},
+			beforeMount() {
+				
+			},
+			mounted() {
+				//alert(document.getElementById('h3').innerText);
+			},
+			beforeUpdate() {
+// 				console.log('page: ' + document.getElementById('h3').innerText)
+// 				console.log('data: ' + this.msg)
+				//页面不是最新,数据是最新
+			},
+			updated() {
+				console.log('page: ' + document.getElementById('h3').innerText)
+				console.log('data: ' + this.msg)
+			}
+		})
+	</script>
+</html>

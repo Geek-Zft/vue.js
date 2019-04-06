@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="lib/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<input type="button" value="btn1" v-bind:title="mytitle" v-on:click="alert">
+			<input type="button" value="btn2" title="title" @click="alert">
+		</div>
+	</body>
+	<script type="text/javascript">
+		new Vue({
+			el: "#app",
+			data: {
+				mytitle: 'this is mytitle'
+			},
+			methods: {
+				alert() {
+					alert("test v-on");
+				}
+			}
+		})
+	</script>
+</html>

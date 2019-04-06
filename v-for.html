@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<script src="lib/vue.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+		<div id="app">
+			<!-- loop simple array -->
+			<p v-for="(item,index) in list">index:{{index}}-->item:{{item}}</p><hr>
+			<!-- loop object array -->
+			<p v-for="user in list2">id:{{user.id}}-->name:{{user.name}}</p><hr>
+			<!-- object -->
+			<p v-for="(val,key) in user">{{key}}-->{{val}}</p><hr>
+			<!-- number -->
+			<p v-for="count in 10"> this is {{count}}</p><hr>
+		</div>
+	</body>
+	<script>
+		new Vue({
+			el: "#app",
+			data: {
+				list: [1,2,3,4,5,6],
+				list2: [
+					{id:1,name:'Tom'},
+					{id:2,name:'John'},
+					{id:3,name:'Jerry'}
+				],
+				user: {
+					id: 1,
+					name: 'Geek-Z',
+					age: 24
+				}
+			},
+			methods: {
+			
+			}
+		})
+	</script>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<script src="lib/vue.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+		<div id="app">
+			<!-- 可以传递多个参数 ,可多个filter,会传递从前往后-->
+			<p>{{ msg | msgFormat('crazy') | test }}</p>
+		</div>
+	</body>
+	<script>
+		//define a filter
+		Vue.filter('msgFormat',function(msg,arg) {
+			//可以用正则
+			return msg.replace(/单纯/g,arg)
+		})
+		
+		Vue.filter('test',function(msg) {
+			return msg + '==='
+		})
+		
+		
+		new Vue({
+			el: "#app",
+			data: {
+				msg: '曾经我也是一个单纯的少年，单纯的我，傻傻的问，谁是这个世界上最单纯的男人'
+			},
+			methods: {
+			
+			},
+			//私有过滤器,优先调用
+			filters: {
+				msgFormat: function(msg) {
+					return 'private filter';
+				}
+			}
+		})
+	</script>
+</html>

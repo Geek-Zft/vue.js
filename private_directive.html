@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<script src="lib/vue.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+		<div id="app">
+			<p v-fontweight="800" v-fontsize="200">dfffff</p>
+		</div>
+	</body>
+	<script>
+		new Vue({
+			el: "#app",
+			data: {
+				
+			},
+			methods: {
+			
+			},
+			directives: {
+				//define private directives
+				'fontweight': { //指令名称不能大写
+					bind: function(el,binding) {
+						el.style.fontWeight=binding.value
+					}
+				},
+				//简写,官方文档有写
+				'fontsize': function(el,binding) {
+					el.style.fontSize=parseInt(binding.value) + 'px'
+				}
+			}
+		})
+	</script>
+</html>

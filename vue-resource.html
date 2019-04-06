@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>vue-resource发送get,post,jsonp</title> <!-- //axios第三方 -->
+	</head>
+	<script src="lib/vue.js" type="text/javascript" charset="utf-8"></script>
+	<!-- 引入vue-resource 依赖顺序注意-->
+	<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script> 
+	<body>
+		<div id="app">
+			<input type="button" value="get" @click="getInfo">
+			<input type="button" value="post" @click="postInfo">
+			<input type="button" value="jsonp" @click="jsonpInfo">
+		</div>
+	</body>
+	<script>
+		new Vue({
+			el: "#app",
+			data: {
+				
+			},
+			methods: {
+				//get 通过.then获取结果
+				getInfo() {
+					this.$http.get('http://kerys.pythonanywhere.com/api/getprodlist/').then(function(result){
+						//通过result.body拿到服务器返回的成功的数据
+						//console.log(result)
+					})
+				},
+				//post
+				postInfo() {
+					this.$http.post('http://kerys.pythonanywhere.com/api/addprod/',{},{emulateJson: true}).then(result=>{
+						console.log(result)
+					})
+				},
+				//jsonp
+				jsonpInfo() {
+					this.$http.jsonp('http://vue.studyit.io/api/jsonp').then(result=>{
+						console.log(result)
+					})
+				}
+			}
+		})
+	</script>
+</html>
