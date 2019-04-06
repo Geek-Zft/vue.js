@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
+    <!--
+        摘自官网
+    <transition
+    v-on:before-enter="beforeEnter"
+    v-on:enter="enter"
+    v-on:after-enter="afterEnter"
+    v-on:enter-cancelled="enterCancelled"
+  
+    v-on:before-leave="beforeLeave"
+    v-on:leave="leave"
+    v-on:after-leave="afterLeave"
+    v-on:leave-cancelled="leaveCancelled"
+  >
+   
+  </transition> -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +34,14 @@
 <body>
     <div id="app">
         <input type="button" value="快到碗里来~" @click="flag=!flag">
-        <div v-show="flag" class="ball"></div>
+        <transition
+            @before-enter="beforeEnter"
+            @enter="enter"
+            @after-enter="afterEnter"
+         >
+            <div v-show="flag" class="ball"></div>
+        </transition>
+        
     </div>
 
     <script>
@@ -29,7 +50,28 @@
             data: {
                 flag: false
             },
-            methods: {}
+            methods: {
+                //动画钩子函数的第一个对象，el表示要执行动画元素的那个dom元素，是一个原生的JS dom对象
+                beforeEnter(el) {
+                    //动画入场之前，此时动画尚未开始，可以设置元素起始样式
+                    el.style.transform = 'translate(0, 0)'
+                },
+                enter(el,done) {
+                    //这句话没有本质的意义，
+                    //但如果不加，没有动画效果，可以认为会强制刷新动画
+                    el.offsetWidth
+                    //表示动画开始之后的样式，可以设置完成动画之后的结束状态
+                    el.style.transform = 'translate(150px, 450px)'
+                    el.style.transition = 'all 1s ease'
+
+
+                    //这里的done其实就是afterEnter函数，也就是说done是一个函数的引用
+                    done()
+                },
+                afterEnter(el) {
+                    this.flag = !this.flag
+                }
+            }
         });
     </script>
 </body>
