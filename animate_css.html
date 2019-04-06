@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>使用animate.css实现入场离场</title>
+    <script src="lib/vue.js"></script>
+    <!-- animate css -->
+    <link href="https://cdn.bootcss.com/animate.css/3.7.0/animate.css" rel="stylesheet">
+
+    <!-- 入场 bounceIn 离场  bounceOut -->
+
+</head>
+
+<body>
+    <div id="app">
+            <input type="button" value="change" @click="flag=!flag">
+            <!-- <h3 v-if="flag">this is a h3</h3> -->
+    
+            <!-- 使用过渡类名实现动画 -->
+            <!-- 使用 transition元素，把需要被动画控制的元素包裹起来 -->
+            <!-- transition 是vue官方提供 -->
+            <!-- 制定动画class -->
+            <!-- :duration统一设置入场，离场时间动画时长  单位毫秒 -->
+            <!-- <transition enter-active-class="bounceIn" leave-active-class="bounceOut" :duration="200">
+                    <h3 v-if="flag">this is a h3</h3>
+            </transition> -->
+            <!-- 分开设置动画时长 -->
+            <transition enter-active-class="bounceIn" leave-active-class="bounceOut" :duration="{enter: 200, leave: 400}">
+                    <h3 v-if="flag">this is a h3</h3>
+            </transition> 
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                flag: false
+            },
+            methods: {}
+        });
+    </script>
+</body>
+
+</html>
